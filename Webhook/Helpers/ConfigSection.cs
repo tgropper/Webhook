@@ -15,7 +15,7 @@ namespace Webhook.Helpers
         {
             get
             {
-                return ((UrlConfigurationElementCollection)this["hooks"]).OfType<UrlConfigurationElement>()
+                return Hooks.OfType<UrlConfigurationElement>()
                     .ToDictionary(x => x.Name, x => x);
             }
         }
