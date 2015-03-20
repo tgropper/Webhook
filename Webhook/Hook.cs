@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Linq;
-using System.Web;
+using Webhook.Helpers;
 
 namespace Webhook
 {
@@ -15,8 +14,8 @@ namespace Webhook
 
         public void Notify(string key, object queryString = null, object body = null)
         {
-            var qs = GetQueryString(queryString);
-            var json = GetJsonBody(body);
+            var qs = ClientHelpers.GetQueryString(queryString);
+            var json = ClientHelpers.GetJsonBody(body);
 
             var data = ConfigSection.Webhook.Data[key];
             if (data.Method == "GET")
@@ -28,27 +27,9 @@ namespace Webhook
                 _client.httpPostRequest(data.Url, json);
             }
             else
-                throw new NotImplementedException(String.Format("Method {0} is not implemented yet", data.Method));
-        }
-
-        private string GetQueryString(object obj = null)
-        {
-            if (obj == null)
-                return null;
-
-            var properties = from p in obj.GetType().GetProperties()
-                             where p.GetValue(obj, null) != null
-                             select p.Name + "=" + HttpUtility.UrlEncode(p.GetValue(obj, null).ToString());
-
-            return "?" + String.Join("&", properties.ToArray());
-        }
-
-        private string GetJsonBody(object obj = null)
-        {
-            if (obj == null)
-                return null;
-
-            return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+            {
+                throw new NotImplementedException(String.Format("Http method {0} is not implemented yet", data.Method));
+            }
         }
     }
 }

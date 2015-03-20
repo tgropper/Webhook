@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.Linq;
 
-namespace Webhook
+namespace Webhook.Helpers
 {
     public class ConfigSection : ConfigurationSection
     {

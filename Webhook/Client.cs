@@ -20,9 +20,17 @@ namespace Webhook
                     streamWriter.Close();
                 }
 
-                using (var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse())
+                try
                 {
-                    return httpResponse.StatusCode == HttpStatusCode.OK;
+                    using (var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse())
+                    {
+                        return httpResponse.StatusCode == HttpStatusCode.OK;
+                    }
+                }
+                catch (WebException)
+                {
+                    //Log(ex.Message);
+                    return false;
                 }
             }
         }
@@ -39,7 +47,7 @@ namespace Webhook
                     return httpResponse.StatusCode == HttpStatusCode.OK;
                 }
             }
-            catch (WebException ex)
+            catch (WebException)
             {
                 //Log(ex.Message);
                 return false;
