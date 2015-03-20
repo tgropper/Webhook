@@ -1,6 +1,48 @@
 # Webhook for .NET
 
-
 ### NuGet intallation
 
 `PM> Install-Package Webhook`
+
+
+### Configuration
+
+Add into the configuration file the following lines:
+ 
+```
+<configSections>
+	...
+	<section name="webhook" type="Webhook.Helpers.ConfigSection, Webhook" />
+	...
+</configSections>
+...
+<webhook>
+	<hooks>
+		<add name="notes-es" url="http://service.com/notes/es/hook" method="GET" />
+		<add name="shows-pt" url="http://service.com/shows/pt/hook" method="POST" />
+		...
+	</hooks>
+</webhook>
+```
+
+### Usage
+
+Create an `IHook` instance, passing as *optional* argument an `Action<Exception>` to handle errors within the execution of the `hook` (most commonly to log the error).
+
+```
+IHook hook = new Hook(onError: ex => log.Error(ex.Message));
+```
+
+Call the `Notify[Async]` method of the `IHook` interface. It expects the following parameters:
+
+* `key`: `string`. The key to access the hook configuration
+* `queryString`: `object`. *Optional*
+* `body`: `object`. *Optional*
+
+```
+hook.NotifyAsync("notes-es", queryString: new { ids = new string[] { "qwe", "rty" } });
+```
+
+This will make an `asynchronous` call to the specified `url`.
+
+`IHook` supports `synchronous` and `asynchronous` calls.
