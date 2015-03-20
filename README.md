@@ -16,7 +16,7 @@ Add into the configuration file the following lines:
 	...
 </configSections>
 ...
-<webhook>
+<webhook enable="true">
 	<hooks>
 		<add name="notes-es" url="http://service.com/notes/es/hook" method="GET" />
 		<add name="shows-pt" url="http://service.com/shows/pt/hook" method="POST" />

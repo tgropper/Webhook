@@ -15,8 +15,7 @@ namespace Webhook.Helpers
         {
             get
             {
-                return Hooks.OfType<UrlConfigurationElement>()
-                    .ToDictionary(x => x.Name, x => x);
+                return Hooks.OfType<UrlConfigurationElement>().ToDictionary(x => x.Name, x => x);
             }
         }
 
@@ -38,6 +37,13 @@ namespace Webhook.Helpers
             protected override object GetElementKey(ConfigurationElement element)
             {
                 return ((UrlConfigurationElement)element).Name;
+            }
+
+            [ConfigurationProperty("enable", IsKey = true, IsRequired = false)]
+            public bool Enable
+            {
+                get { return (bool)this["enable"]; }
+                set { this["enable"] = value; }
             }
         }
 

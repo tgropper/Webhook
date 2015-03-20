@@ -21,6 +21,9 @@ namespace Webhook
         {
             try
             {
+                if (!ConfigSection.Webhook.Hooks.Enable)
+                    return;
+
                 var qs = ClientHelpers.GetQueryString(queryString);
                 var json = ClientHelpers.GetJsonBody(body);
 
