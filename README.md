@@ -45,4 +45,4 @@ hook.NotifyAsync("notes-es", queryString: new { ids = new string[] { "qwe", "rty
 
 This will make an `asynchronous` call to the specified `url`.
 
-`IHook` supports `synchronous` and `asynchronous` calls.
+`IHook` supports both `synchronous` and `asynchronous` calls.
