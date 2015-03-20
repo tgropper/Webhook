@@ -18,8 +18,8 @@ Add into the configuration file the following lines:
 ...
 <webhook enable="true">
 	<hooks>
-		<add name="notes-es" url="http://service.com/notes/es/hook" method="GET" />
-		<add name="shows-pt" url="http://service.com/shows/pt/hook" method="POST" />
+		<add name="notes" url="http://service.com/notes/hook" method="GET" />
+		<add name="shows" url="http://service.com/shows/hook" method="POST" />
 		...
 	</hooks>
 </webhook>
