@@ -16,8 +16,8 @@ Add into the configuration file the following lines:
 	...
 </configSections>
 ...
-<webhook enable="true">
-	<hooks>
+<webhook>
+	<hooks enable="true">
 		<add name="notes" url="http://service.com/notes/hook" method="GET" />
 		<add name="shows" url="http://service.com/shows/hook" method="POST" />
 		...
