@@ -30,7 +30,7 @@ namespace Webhook.Helpers
                 }
             }
 
-            return "?" + String.Join("&", qs.ToArray());
+            return String.Join("&", qs.ToArray());
         }
 
         internal static string GetJsonBody(object obj = null)

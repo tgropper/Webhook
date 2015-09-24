@@ -30,7 +30,8 @@ namespace Webhook
                 var data = ConfigSection.Webhook.Data[key];
                 if (data.Method == "GET")
                 {
-                    _client.httpGetRequest(data.Url + qs);
+                    var url = data.Url + (data.Url.Contains("?") ? "&" : "?") + qs;
+                    _client.httpGetRequest(url);
                 }
                 else if (data.Method == "POST")
                 {
